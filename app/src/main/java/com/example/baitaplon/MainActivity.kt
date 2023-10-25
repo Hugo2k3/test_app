@@ -21,6 +21,7 @@ import java.util.*
 
 class MainActivity : AppCompatActivity(), View.OnClickListener {
     // tao UI
+    // khai báo các biến thuộc tính
     lateinit var addBtn: Button
     lateinit var viewcurrentMonthBtn:Button
     lateinit var chooseDate:Button
@@ -33,7 +34,10 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
     lateinit var sqlExpense: ExpenseDatabase
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        // nap du lieu activity_main
         setContentView(R.layout.activity_main)
+
+
         sqlExpense = ExpenseDatabase(this)
         initUI()
         initListener()
@@ -41,6 +45,7 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
 
     }
     fun initUI(){
+        // anh xa
         addBtn = findViewById(R.id.addNewExpenseBtn)
         viewcurrentMonthBtn = findViewById(R.id.currentMonthExpenseBtn)
         chooseDate = findViewById(R.id.chooseDateBtn)
@@ -48,12 +53,14 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
         selectedDateText = findViewById(R.id.selectedDateTxtView)
     }
     fun initListener(){
+        // lang nghe su kien su kien cho nut giao dien
         addBtn.setOnClickListener(this)
         viewYear.setOnClickListener(this)
         chooseDate.setOnClickListener(this)
         viewcurrentMonthBtn.setOnClickListener(this)
     }
     private fun initTodayDate() {
+        // lay ngay hien tai hien thi nó trên giao dien
         cal = Calendar.getInstance()
         val mYear = cal.get(Calendar.YEAR)
         val mMonth = cal.getDisplayName(Calendar.MONTH,Calendar.SHORT,Locale.US)
@@ -79,7 +86,7 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
             R.id.addNewExpenseBtn->{
                 val view = layoutInflater.inflate(R.layout.add_dialog, null)
                 val builder = AlertDialog.Builder(this)
-                builder.setTitle("Add New Expense")
+                builder.setTitle("THÊM CHI PHÍ MỚI")
                 builder.setView(view)
                 val newExpItemName = view.findViewById(R.id.spinerListItem) as Spinner
                 val newExpAmount = view.findViewById(R.id.amountEdText) as EditText
@@ -92,7 +99,7 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
                 }
                 addBtn.setOnClickListener{
                     if(newExpItemName.selectedItem.toString() != "Select item"){
-                        val newExp = Expense("0", newExpItemName.selectedItem.toString(), newExpAmount.text.toString(), newExpNote.text.toString(), passedMonth.toString())
+                        val newExp = Expense("0", newExpItemName.selectedItem.toString(),newExpAmount.text.toString() , newExpNote.text.toString(), passedMonth.toString())
                         val staus = sqlExpense.insertExpense(newExp)
                         Toast.makeText(this@MainActivity, "Đã lưu thành công chi phí", Toast.LENGTH_SHORT).show()
                         val intent: Intent = Intent(this, ExpenseDateActivity::class.java)

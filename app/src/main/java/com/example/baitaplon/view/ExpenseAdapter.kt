@@ -15,6 +15,11 @@ import com.example.baitaplon.model.Expense
 
 
 class ExpensesAdapter(val c:Context, val ExpenseList: ArrayList<Expense>): RecyclerView.Adapter<ExpensesAdapter.ExpensesViewHolder>() {
+//    ExpensesAdapter là một lớp adapter, được sử dụng để kết nối dữ liệu với một RecyclerView. Nó có nhiệm vụ hiển thị danh sách các khoản chi tiêu
+//    (Expense) lên giao diện người dùng.
+//
+//    ExpensesViewHolder là một lớp lồng bên trong ExpensesAdapter, đại diện cho các phần tử trong danh sách chi tiêu.
+//    Mỗi phần tử sẽ có một cái gọi là ViewHolder, trong đó bạn ánh xạ các thành phần giao diện như TextViews, ImageView và các thành phần khác.
     lateinit var sqlExp: ExpenseDatabase
     inner class ExpensesViewHolder(val v:View) : RecyclerView.ViewHolder(v){
         val nameItem:TextView
@@ -126,5 +131,20 @@ class ExpensesAdapter(val c:Context, val ExpenseList: ArrayList<Expense>): Recyc
     override fun getItemCount(): Int {
         return ExpenseList.size
     }
+//    Trong hàm popupMenus,  tạo một PopupMenu khi người dùng bấm vào nút xóa (delete).
+//    PopupMenu này chứa hai tùy chọn: chỉnh sửa (editExp) và xóa (delete). Khi người dùng chọn một tùy chọn,
+//    bạn thực hiện các hành động tương ứng như chỉnh sửa hoặc xóa một khoản chi tiêu.
+//
+//    onCreateViewHolder được sử dụng để tạo và khởi tạo một ViewHolder mới cho từng phần tử trong danh sách.
+//
+//    onBindViewHolder được gọi khi RecyclerView cần hiển thị dữ liệu cho một ViewHolder cụ thể.
+//    Trong phần này, bạn ánh xạ dữ liệu của khoản chi tiêu vào các thành phần giao diện của ViewHolder.
+//
+//    getItemCount trả về số lượng các khoản chi tiêu trong danh sách.
+//
+//    Tóm lại, mã này tạo ra một adapter cho RecyclerView để hiển thị danh sách các khoản chi tiêu.
+//    Nó cho phép người dùng xem, chỉnh sửa và xóa các khoản chi tiêu từ danh sách.
+//
+//Adapter này có cả hai tùy chọn xóa và chỉnh sửa khi người dùng nhấn vào nút "xóa" trên mỗi phần tử trong danh sách.
 
 }

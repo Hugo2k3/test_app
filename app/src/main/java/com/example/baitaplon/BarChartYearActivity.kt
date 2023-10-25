@@ -10,7 +10,7 @@ import com.github.mikephil.charting.charts.BarChart
 import com.github.mikephil.charting.data.BarData
 import com.github.mikephil.charting.data.BarDataSet
 import com.github.mikephil.charting.data.BarEntry
-
+// tổng số tiền của mỗi tháng đã chi tiêu cho mỗi tháng trong năm
 class BarChartYearActivity : AppCompatActivity() {
     lateinit var sqlExp: ExpenseDatabase
     lateinit var barChartYear: BarChart
@@ -18,9 +18,11 @@ class BarChartYearActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
 
         super.onCreate(savedInstanceState)
+        // nap từ tệp  activity_bar_chart_year
         setContentView(R.layout.activity_bar_chart_year)
         sqlExp = ExpenseDatabase(this)
         barChartYear = findViewById(R.id.barchartExpYear)
+        // khai báo 1 list truyền tất cả dữ liệu tên tháng vào mảng
         val xvalue = ArrayList<String>()
         val January = "Jan"
         val February = "Fed"
@@ -46,6 +48,7 @@ class BarChartYearActivity : AppCompatActivity() {
         xvalue.add(October)
         xvalue.add(November)
         xvalue.add(December)
+        // gọi hàm  totalInMonth với cơ sở dữ liệu từ cơ sở dữ liệu được lọc theo từng tháng
         val barentries = ArrayList<BarEntry>()
         barentries.add(BarEntry(totalInMonth(sqlExp.fillterMonth(January)), 0))
         barentries.add(BarEntry(totalInMonth(sqlExp.fillterMonth(February)), 1))
@@ -59,13 +62,17 @@ class BarChartYearActivity : AppCompatActivity() {
         barentries.add(BarEntry(totalInMonth(sqlExp.fillterMonth(October)), 9))
         barentries.add(BarEntry(totalInMonth(sqlExp.fillterMonth(November)), 10))
         barentries.add(BarEntry(totalInMonth(sqlExp.fillterMonth(December)), 11))
+        // thay đổi nền và màu của đồ thị
         val bardataset = BarDataSet(barentries, "Biểu đồ các tháng`")
         bardataset.color = resources.getColor(R.color.purple_200 )
         barChartYear.setBackgroundColor(resources.getColor(R.color.white))
         val data = BarData(xvalue, bardataset)
         barChartYear.data = data
+        // tạo hiệu ứng xuất hiện của biểu đồ trong vòng 2 s
         barChartYear.animateXY(2000, 2000)
+        // ánh xạ đến nút button
         detailYearButton = findViewById(R.id.detailItemYearBtn)
+        // thiết lập trình nghe sự kiện để khi được nhấn
         detailYearButton.setOnClickListener{
             val intent: Intent = Intent(this, BarChartDetail::class.java)
             startActivity(intent)
@@ -73,6 +80,7 @@ class BarChartYearActivity : AppCompatActivity() {
 
 
     }
+    // hảm tính tổng
     fun totalInMonth(arraylist: ArrayList<Expense>): Float {
         var total: Int = 0
         for (i in arraylist){

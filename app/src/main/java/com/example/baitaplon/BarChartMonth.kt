@@ -10,7 +10,7 @@ import com.github.mikephil.charting.charts.BarChart
 import com.github.mikephil.charting.data.BarData
 import com.github.mikephil.charting.data.BarDataSet
 import com.github.mikephil.charting.data.BarEntry
-
+// hiển thị chi tiêu cho 1 tháng cụ thể gần tương tự BarChartDetail
 class BarChartMonth : AppCompatActivity() {
     lateinit var sqlExp: ExpenseDatabase
     lateinit var barChart: BarChart

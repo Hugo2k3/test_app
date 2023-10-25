@@ -3,12 +3,12 @@
     <!--we add icons-->
     <item
         android:id="@+id/editExp"
-        android:title="Edit Text"
+        android:title="Chỉnh sửa"
         android:icon="@drawable/ic_edit"
         />
     <item
         android:id="@+id/delete"
-        android:title="DeleteExp"
+        android:title="Xóa"
         android:icon="@drawable/ic_delete"
         />
 

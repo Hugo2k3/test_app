@@ -12,18 +12,30 @@ import com.example.baitaplon.model.Expense
 import com.example.baitaplon.model.ExpenseMonth
 import com.example.baitaplon.view.ExpenseYearAdapter
 
+// Hoạt động này được sử dụng để hiển thị tổng số tiền đã chi tiêu cho mỗi tháng trong năm và tổng cộng cho cả năm.
 class ExpenseYear : AppCompatActivity() {
+     //được sử dụng để hiển thị danh sách các tháng và tổng số tiền đã chi tiêu trong mỗi tháng.
     lateinit var expYearRcler: RecyclerView
+    //  hiển thị tổng số tiền
     lateinit var totalYear: TextView
+    // là 1 button được sử dụng để chuyển đến 1 hoạt động khác
     lateinit var barcharYearBtn: Button
+    // mỗi đối tượng là 1 tháng và là tổng chi tiêu trong tháng đó
     lateinit var listMonth: ArrayList<ExpenseMonth>
+    // biến truy xuất dữ liệu
     lateinit var sqlExp: ExpenseDatabase
+    //được sử dụng để hiển thị danh sách các tháng và tổng số tiền đã chi tiêu trong RecyclerView.
     lateinit var expYearAdapter: ExpenseYearAdapter
+
     override fun onCreate(savedInstanceState: Bundle?) {
+        // nạp từ tệp activity_expense_year
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_expense_year)
+
         listMonth = ArrayList<ExpenseMonth>()
+
         expYearRcler = findViewById(R.id.viewYearRecycler)
+
         totalYear = findViewById(R.id.totalYearExp)
         barcharYearBtn = findViewById(R.id.viewBarChartYearBtn)
         sqlExp = ExpenseDatabase(this)
@@ -62,7 +74,7 @@ class ExpenseYear : AppCompatActivity() {
         obj7.nameMonth = "Jul"
         obj7.totalAmountMonth = expMonth(obj7.nameMonth)
         listMonth.add(obj7)
-        obj8.nameMonth = "Agu"
+        obj8.nameMonth = "Aug"
         obj8.totalAmountMonth = expMonth(obj8.nameMonth)
         listMonth.add(obj8)
         obj9.nameMonth = "Sep"
@@ -77,15 +89,21 @@ class ExpenseYear : AppCompatActivity() {
         obj12.nameMonth = "Dec"
         obj12.totalAmountMonth = expMonth(obj12.nameMonth)
         listMonth.add(obj12)
+        //Danh sách các tháng và tổng số tiền đã chi tiêu trong mỗi tháng được tạo và gán vào danh sách listMonth thông qua các đối tượng ExpenseMonth.
+        //được sử dụng để hiển thị danh sách các tháng và tổng số tiền đã chi tiêu trong RecyclerView.
         expYearAdapter = ExpenseYearAdapter(this, listMonth)
         expYearRcler.layoutManager = LinearLayoutManager(this)
         expYearRcler.adapter = expYearAdapter
-        totalYear.text = expYear(listMonth) + " $"
+        // hiển thị tổng tiền dưới dạng VNĐ
+        totalYear.text = expYear(listMonth) + "Đ"
+
+        //thiết lập một trình nghe sự kiện (listener) để khi được nhấn, nó mở một hoạt động mới (BarChartYearActivity) để hiển thị biểu đồ cột.
         barcharYearBtn.setOnClickListener{
             val intent: Intent = Intent(this, BarChartYearActivity::class.java)
             startActivity(intent)
         }
     }
+    // tính tổng số tiền đã chi tiêu trong 1 tháng cụ thể bằng cách truy xuất dữ liệu
     fun expMonth(nameMonth: String): String {
         var total: Int = 0
         var array: ArrayList<Expense> = sqlExp.fillterMonth(nameMonth)
@@ -94,6 +112,7 @@ class ExpenseYear : AppCompatActivity() {
         }
         return total.toString()
     }
+    // tính tổng số tiển của cả năm bằng cách duyệt qua từng tháng
     fun expYear(listExpMonth: ArrayList<ExpenseMonth>): String{
         var total: Int = 0
         for(i in listExpMonth){

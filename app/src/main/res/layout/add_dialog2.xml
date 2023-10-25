@@ -46,7 +46,7 @@
                 android:id="@+id/amountEdText2"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="Enter Amount"
+                android:hint="Nhập số lượng"
                 android:inputType="number"
                 android:minHeight="48dp"
                 android:textColor="#000"
@@ -56,7 +56,7 @@
                 android:id="@+id/noteEdText2"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="Enter note"
+                android:hint="Ghi chú"
                 android:minHeight="48dp"
                 android:textColor="#000"
                 android:textColorHint="#000" />

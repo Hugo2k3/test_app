@@ -1,7 +1,7 @@
 <resources>
     <string name="app_name">ExpenseApp</string>
     <string-array name="items">
-        <item>Select item</item>
+        <item>Loại chi phí</item>
         <item>Tiền nhà</item>
         <item>Ăn uống</item>
         <item>Tiết kiệm</item>
